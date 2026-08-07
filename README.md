@@ -28,7 +28,7 @@
 
 ### 파일을 직접 받는 방법
 
-1. 아이폰에서 [`custom_light.ktheme` 내려받기](https://han-hyeonmin.github.io/kakaotalk-custom-theme/themes/custom_light.ktheme)
+1. 아이폰에서 [`custom-light.ktheme` 내려받기](https://han-hyeonmin.github.io/kakaotalk-custom-theme/download/custom-light.ktheme)
 2. 받은 파일을 카카오톡 **나와의 채팅**으로 공유
 3. 채팅방에서 파일을 **탭** → **「테마 적용하기」**
 4. 카카오톡이 재시작되면 적용 완료
@@ -49,25 +49,30 @@
 ## 🛠 직접 고쳐 쓰기
 
 ```
-01_Custom/
-└─ custom_light/
+themes/
+└─ custom-light/             # 폴더명이 곧 .ktheme 파일명이 된다
    ├─ KakaoTalkTheme.css     # 테마 정의
    └─ Images/
       ├─ commonIcoTheme.png  # 테마 목록에 뜨는 썸네일 (162×162)
       └─ profileImg01@3x.png # 기본 프로필 이미지
+
+docs/                        # GitHub Pages 로 배포되는 설치 페이지
+└─ download/                 # build.sh 결과물이 놓이는 곳
+   └─ custom-light.ktheme
 ```
 
 색만 바꾸고 싶다면 `KakaoTalkTheme.css`의 `background-color` 값만 고치면 됩니다.
-`ManifestStyle`의 `-kakaotalk-theme-name`, `-kakaotalk-author-name`도 본인 것으로 바꿔 주세요.
+`ManifestStyle`의 `-kakaotalk-theme-name`, `-kakaotalk-author-name` 도 본인 것으로 바꿔 주세요.
+`-kakaotalk-theme-version` 은 릴리스 태그와 같은 값으로 유지합니다 (현재 `1.0.1` = `v1.0.1`).
 
 ### 빌드
 
 ```bash
-./build.sh              # 01_Custom 하위 전체를 패키징
-./build.sh custom_light # 특정 테마만
+./build.sh              # themes/ 하위 전체를 패키징
+./build.sh custom-light # 특정 테마만
 ```
 
-결과물은 `docs/themes/<테마명>.ktheme` 에 생성됩니다 (설치 페이지가 그대로 배포하는 경로).
+결과물은 `docs/download/<테마명>.ktheme` 에 생성됩니다 (설치 페이지가 그대로 배포하는 경로).
 
 ### `.ktheme` 를 손으로 만들 때 주의할 점
 
@@ -75,8 +80,8 @@
 
 ```
 ✅ 올바름                    ❌ 적용 안 됨
-custom_light.ktheme         custom_light.ktheme
-├─ KakaoTalkTheme.css       └─ custom_light/
+custom-light.ktheme         custom-light.ktheme
+├─ KakaoTalkTheme.css       └─ custom-light/
 └─ Images/                     ├─ KakaoTalkTheme.css
    └─ *.png                    └─ Images/
 ```

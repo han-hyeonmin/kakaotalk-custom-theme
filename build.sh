@@ -1,19 +1,19 @@
 #!/usr/bin/env bash
 #
-# 01_Custom/<테마명>/ 아래의 KakaoTalkTheme.css 와 Images/ 를 .ktheme 로 패키징한다.
+# themes/<테마명>/ 아래의 KakaoTalkTheme.css 와 Images/ 를 .ktheme 로 패키징한다.
 #
 # 주의: 카카오톡은 zip 최상위에 KakaoTalkTheme.css 와 Images/ 가 바로 있어야 인식한다.
 #       테마 폴더 자체를 압축하면(= folder/KakaoTalkTheme.css) 적용되지 않는다.
 #       macOS 가 끼워 넣는 .DS_Store / __MACOSX 도 함께 제거한다.
 #
-# 사용법: ./build.sh [테마명 ...]   (인자 없으면 01_Custom 하위 전체)
+# 사용법: ./build.sh [테마명 ...]   (인자 없으면 themes/ 하위 전체)
 
 set -euo pipefail
 
 cd "$(dirname "$0")"
 
-SRC_ROOT="01_Custom"
-OUT_DIR="docs/themes"
+SRC_ROOT="themes"
+OUT_DIR="docs/download"
 
 mkdir -p "$OUT_DIR"
 
