@@ -1,0 +1,60 @@
+/*
+ Manifest
+ */
+
+ManifestStyle {
+    -kakaotalk-theme-name: '커스텀 테마 라이트 모드';
+    -kakaotalk-theme-version: '수정 문의: 한현민';
+    -kakaotalk-theme-url: 'https://han-hyeonmin.github.io/kakaotalk-custom-theme/';
+    -kakaotalk-author-name: 'hyeonmin_han';
+    -kakaotalk-theme-id: 'com.kakao.talk.theme.0000';
+}
+
+
+
+/*
+ MainView Style
+ */
+
+MainViewStyle-Primary {
+    background-color: #FFFFFE;
+}
+
+
+/*
+ TabBar Style
+ */
+
+TabBarStyle-Main {
+    background-color: #FFFFFE;
+}
+
+/*
+ DefaultProfile Style
+*/
+
+DefaultProfileStyle {
+    /* 프로필 */
+    -ios-profile-images: 'profileImg01.png';
+}
+
+
+/*
+ ChatRoom Style
+ */
+
+BackgroundStyle-ChatRoom {
+    background-color: #ABC1D1;
+}
+
+/*
+ Message Style
+ */
+
+MessageCellStyle-Send {
+    -ios-unread-text-color: #556274;
+}
+
+MessageCellStyle-Receive {
+    -ios-unread-text-color: #556274;
+}

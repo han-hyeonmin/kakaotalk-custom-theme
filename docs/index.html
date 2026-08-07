@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>커스텀 테마 라이트 모드 · 카카오톡 테마</title>
+<meta name="description" content="카카오톡 사용자 테마 '커스텀 테마 라이트 모드' — 모바일에서 버튼 한 번으로 카카오톡에 공유하고 바로 적용하세요.">
+<meta name="theme-color" content="#ABC1D1">
+<meta property="og:title" content="커스텀 테마 라이트 모드 · 카카오톡 테마">
+<meta property="og:description" content="버튼 한 번으로 카카오톡에 공유하고 바로 적용하는 라이트 테마">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='23' fill='%23ABC1D1'/><rect x='20' y='24' width='60' height='42' rx='12' fill='white'/><path d='M40 64 L53 64 L42 80 Z' fill='white'/></svg>">
+<style>
+  :root{
+    --bg:#F4F7F9; --card:#FFFFFF; --ink:#1B2430; --muted:#5C6B7A;
+    --line:#E2E8EE; --accent:#ABC1D1; --accent-ink:#3D566E; --kakao:#FEE500; --kakao-ink:#191600;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{ --bg:#0F151B; --card:#18212B; --ink:#E9EEF3; --muted:#9DAAB8;
+           --line:#26323E; --accent-ink:#ABC1D1; }
+  }
+  *{ box-sizing:border-box; }
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font:16px/1.65 -apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Pretendard","Noto Sans KR",sans-serif;
+    -webkit-text-size-adjust:100%;
+    padding:max(20px,env(safe-area-inset-top)) 18px calc(40px + env(safe-area-inset-bottom));
+  }
+  .wrap{ max-width:520px; margin:0 auto; }
+  header{ text-align:center; padding:14px 0 26px; }
+  .thumb{
+    width:88px; height:88px; border-radius:22px; background:var(--accent);
+    display:grid; place-items:center; margin:0 auto 16px;
+    box-shadow:0 8px 24px rgba(61,86,110,.18);
+  }
+  .thumb svg{ width:52px; height:52px; }
+  h1{ font-size:24px; line-height:1.35; margin:0 0 6px; letter-spacing:-.02em; }
+  .sub{ color:var(--muted); font-size:14px; margin:0; }
+
+  .card{
+    background:var(--card); border:1px solid var(--line); border-radius:18px;
+    padding:20px; margin-bottom:16px;
+  }
+  h2{ font-size:15px; margin:0 0 12px; letter-spacing:-.01em; }
+  h2 .num{
+    display:inline-grid; place-items:center; width:22px; height:22px; border-radius:50%;
+    background:var(--accent); color:#1B2430; font-size:12px; font-weight:700;
+    margin-right:8px; vertical-align:-4px;
+  }
+
+  .btn{
+    display:flex; align-items:center; justify-content:center; gap:8px;
+    width:100%; padding:16px; border:0; border-radius:14px;
+    font:inherit; font-weight:700; font-size:16px; letter-spacing:-.01em;
+    cursor:pointer; text-decoration:none; -webkit-tap-highlight-color:transparent;
+  }
+  .btn-kakao{ background:var(--kakao); color:var(--kakao-ink); }
+  .btn-kakao:active{ filter:brightness(.94); }
+  .btn-ghost{
+    background:transparent; color:var(--ink);
+    border:1px solid var(--line); margin-top:10px; font-weight:600; font-size:15px;
+  }
+  .btn[disabled]{ opacity:.5; }
+  .hint{ font-size:13px; color:var(--muted); margin:10px 2px 0; }
+  #status{ font-size:13px; color:var(--accent-ink); margin:10px 2px 0; min-height:1.2em; }
+
+  ol{ margin:0; padding-left:20px; }
+  ol li{ margin-bottom:10px; }
+  ol li:last-child{ margin-bottom:0; }
+  li b{ font-weight:700; }
+  .kbd{
+    display:inline-block; padding:1px 7px; border-radius:6px;
+    background:var(--bg); border:1px solid var(--line); font-size:13px; font-weight:600;
+  }
+  details{ border-top:1px solid var(--line); padding-top:14px; margin-top:14px; }
+  details summary{ cursor:pointer; font-size:14px; font-weight:600; color:var(--muted); }
+  details p, details ol{ font-size:14px; color:var(--muted); margin-top:10px; }
+  footer{ text-align:center; font-size:13px; color:var(--muted); padding-top:8px; }
+  footer a{ color:inherit; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="thumb">
+      <svg viewBox="0 0 100 100" aria-hidden="true">
+        <rect x="14" y="18" width="72" height="50" rx="14" fill="#fff"/>
+        <path d="M38 66 L54 66 L41 86 Z" fill="#fff"/>
+      </svg>
+    </div>
+    <h1>커스텀 테마 라이트 모드</h1>
+    <p class="sub">카카오톡 사용자 테마 · iOS / Android</p>
+  </header>
+
+  <div class="card">
+    <h2><span class="num">1</span>카카오톡으로 보내기</h2>
+    <button id="share" class="btn btn-kakao">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path d="M12 3C6.9 3 2.8 6.3 2.8 10.3c0 2.6 1.7 4.8 4.3 6.1l-1 3.8c-.1.3.2.6.5.4l4.5-3c.3 0 .6.1.9.1 5.1 0 9.2-3.3 9.2-7.4S17.1 3 12 3z"/>
+      </svg>
+      카카오톡으로 테마 공유하기
+    </button>
+    <a id="download" class="btn btn-ghost" href="themes/custom_light.ktheme" download="custom_light.ktheme">
+      파일로 직접 내려받기
+    </a>
+    <p id="status"></p>
+    <p class="hint">
+      공유 시트가 열리면 <b>카카오톡 → 나와의 채팅</b>을 고르세요.
+      나에게 보내 두면 언제든 다시 적용할 수 있습니다.
+    </p>
+  </div>
+
+  <div class="card">
+    <h2><span class="num">2</span>채팅방에서 적용하기</h2>
+    <ol>
+      <li>보낸 <b>custom_light.ktheme</b> 파일을 <b>탭</b>합니다.</li>
+      <li>안내창에서 <span class="kbd">테마 적용하기</span>를 누릅니다.</li>
+      <li>카카오톡이 다시 시작되면 적용 완료입니다.</li>
+    </ol>
+
+    <details>
+      <summary>버튼이 안 뜨거나 파일이 열리지 않아요</summary>
+      <ol>
+        <li><b>사용자 테마 허용</b>이 꺼져 있으면 적용 버튼이 나오지 않습니다.
+            <br>카카오톡 <span class="kbd">더보기 ⋯</span> → <span class="kbd">설정 ⚙︎</span> →
+            <span class="kbd">테마</span> → <span class="kbd">사용자 테마</span>를 켜 주세요.</li>
+        <li>PC 카카오톡에서는 적용되지 않습니다. <b>모바일 앱</b>에서 열어야 합니다.</li>
+        <li>파일을 다운로드 앱이나 파일 앱을 거쳐 열면 확장자가 <code>.zip</code>으로
+            바뀌는 경우가 있습니다. 이때는 <b>채팅방에 공유해서 바로 탭</b>하는 방법을 쓰세요.</li>
+        <li>카카오톡 버전이 낮으면 인식하지 못할 수 있습니다. 최신 버전으로 업데이트하세요.</li>
+      </ol>
+    </details>
+
+    <details>
+      <summary>원래 테마로 되돌리려면</summary>
+      <p>카카오톡 <span class="kbd">더보기 ⋯</span> → <span class="kbd">설정 ⚙︎</span> →
+         <span class="kbd">테마</span>에서 <b>기본 테마</b>를 선택하면 됩니다.</p>
+    </details>
+  </div>
+
+  <footer>
+    <a href="https://github.com/han-hyeonmin/kakaotalk-custom-theme">GitHub에서 소스 보기</a>
+  </footer>
+</div>
+
+<script>
+(function () {
+  var FILE = 'themes/custom_light.ktheme';
+  var NAME = 'custom_light.ktheme';
+  var btn = document.getElementById('share');
+  var status = document.getElementById('status');
+
+  function say(msg) { status.textContent = msg || ''; }
+
+  // 데스크톱/미지원 브라우저에서는 공유 버튼 대신 다운로드를 안내한다.
+  if (!(navigator.canShare && navigator.share)) {
+    btn.disabled = true;
+    say('이 브라우저는 파일 공유를 지원하지 않습니다. 휴대폰에서 이 페이지를 열거나, 아래에서 파일을 내려받아 카카오톡 채팅방으로 보내세요.');
+    return;
+  }
+
+  btn.addEventListener('click', async function () {
+    btn.disabled = true;
+    say('테마 파일을 준비하는 중…');
+    try {
+      var res = await fetch(FILE, { cache: 'no-store' });
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      var blob = await res.blob();
+      var file = new File([blob], NAME, { type: 'application/octet-stream' });
+
+      if (!navigator.canShare({ files: [file] })) {
+        throw new Error('unsupported');
+      }
+      say('');
+      await navigator.share({ files: [file] });
+      say('공유했습니다. 채팅방에서 파일을 탭하고 “테마 적용하기”를 누르세요.');
+    } catch (err) {
+      if (err && err.name === 'AbortError') {
+        say('');            // 사용자가 공유를 취소함
+      } else {
+        say('공유에 실패했습니다. 아래 “파일로 직접 내려받기”를 이용해 주세요.');
+      }
+    } finally {
+      btn.disabled = false;
+    }
+  });
+})();
+</script>
+</body>
+</html>
