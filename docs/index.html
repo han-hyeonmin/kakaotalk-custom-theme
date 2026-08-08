@@ -77,6 +77,7 @@
     background:var(--bg); border:1px solid var(--line); font-size:13px; font-weight:600;
   }
   details{ border-top:1px solid var(--line); padding-top:14px; margin-top:14px; }
+  .card > details:first-child{ border-top:0; padding-top:0; margin-top:0; }
   details summary{ cursor:pointer; font-size:14px; font-weight:600; color:var(--muted); }
   details p, details ol{ font-size:14px; color:var(--muted); margin-top:10px; }
   footer{ text-align:center; font-size:13px; color:var(--muted); padding-top:8px; }
@@ -110,7 +111,7 @@
     </a>
     <p id="status"></p>
     <p class="hint">
-      공유 시트가 열리면 <b>카카오톡 → 나와의 채팅</b>을 고르세요.
+      공유 시트가 열리면 <b>카카오톡 → 나에게</b>를 고르세요.
       나에게 보내 두면 언제든 다시 적용할 수 있습니다.
     </p>
   </div>
@@ -126,9 +127,6 @@
     <details>
       <summary>버튼이 안 뜨거나 파일이 열리지 않아요</summary>
       <ol>
-        <li><b>사용자 테마 허용</b>이 꺼져 있으면 적용 버튼이 나오지 않습니다.
-            <br>카카오톡 <span class="kbd">더보기 ⋯</span> → <span class="kbd">설정 ⚙︎</span> →
-            <span class="kbd">테마</span> → <span class="kbd">사용자 테마</span>를 켜 주세요.</li>
         <li><b>Android·PC 카카오톡에서는 적용되지 않습니다.</b> iOS 카카오톡 전용 형식이라 아이폰(또는 아이패드) 앱에서 열어야 합니다.</li>
         <li>파일을 다운로드 앱이나 파일 앱을 거쳐 열면 확장자가 <code>.zip</code>으로
             바뀌는 경우가 있습니다. 이때는 <b>채팅방에 공유해서 바로 탭</b>하는 방법을 쓰세요.</li>
@@ -140,6 +138,19 @@
       <summary>원래 테마로 되돌리려면</summary>
       <p>카카오톡 <span class="kbd">더보기 ⋯</span> → <span class="kbd">설정 ⚙︎</span> →
          <span class="kbd">테마</span>에서 <b>기본 테마</b>를 선택하면 됩니다.</p>
+    </details>
+  </div>
+
+  <div class="card">
+    <details>
+      <summary>이미지 저작권 안내</summary>
+      <p>테마에 포함된 <b>기본 프로필 이미지</b>(<code>profileImg01@3x.png</code>)는
+         출처와 저작권자가 확인되지 않은 파일입니다. 저작권 상태를 확인할 수 없는 상태임을 밝히며,
+         권리자이시거나 출처를 아시는 분은
+         <a href="https://github.com/han-hyeonmin/kakaotalk-custom-theme/issues">이슈</a>로 알려 주시면
+         즉시 교체하거나 삭제하겠습니다.</p>
+      <p>테마 썸네일 이미지는 직접 제작했으며, CSS·빌드 스크립트는 MIT 라이선스입니다.
+         카카오톡은 주식회사 카카오의 상표이고 이 테마는 카카오와 무관한 개인 제작물입니다.</p>
     </details>
   </div>
 
