@@ -3,21 +3,22 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>커스텀 테마 라이트 모드 · iOS 카카오톡 테마</title>
-<meta name="description" content="iOS 카카오톡 사용자 테마 '커스텀 테마 라이트 모드' — 아이폰에서 버튼 한 번으로 카카오톡에 공유하고 바로 적용하세요.">
-<meta name="theme-color" content="#ABC1D1">
-<meta property="og:title" content="커스텀 테마 라이트 모드 · iOS 카카오톡 테마">
-<meta property="og:description" content="아이폰에서 버튼 한 번으로 카카오톡에 공유하고 바로 적용하는 iOS 전용 라이트 테마">
+<title>심플 라이트 · iOS 카카오톡 테마</title>
+<meta name="description" content="iOS 카카오톡 사용자 테마 '심플 라이트' — 튜닝의 끝은 순정. 아이폰에서 버튼 한 번으로 카카오톡에 공유하고 바로 적용하세요.">
+<meta name="theme-color" content="#F5F6F7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#111417" media="(prefers-color-scheme: dark)">
+<meta property="og:title" content="심플 라이트 · iOS 카카오톡 테마">
+<meta property="og:description" content="튜닝의 끝은 순정 — 카카오톡 느낌은 그대로 두고 하얀 화면만 옮겨 온 iOS 전용 라이트 테마">
 <meta property="og:type" content="website">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='23' fill='%23ABC1D1'/><rect x='20' y='24' width='60' height='42' rx='12' fill='white'/><path d='M40 64 L53 64 L42 80 Z' fill='white'/></svg>">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='23' fill='%23E7E9EB'/><rect x='20' y='24' width='60' height='42' rx='12' fill='%232A2F35'/><path d='M40 64 L53 64 L42 80 Z' fill='%232A2F35'/></svg>">
 <style>
   :root{
-    --bg:#F4F7F9; --card:#FFFFFF; --ink:#1B2430; --muted:#5C6B7A;
-    --line:#E2E8EE; --accent:#ABC1D1; --accent-ink:#3D566E; --kakao:#FEE500; --kakao-ink:#191600;
+    --bg:#F5F6F7; --card:#FFFFFF; --ink:#1B1F24; --muted:#5F6771;
+    --line:#E5E7E9; --accent:#E7E9EB; --accent-ink:#4B535D; --kakao:#FEE500; --kakao-ink:#191600;
   }
   @media (prefers-color-scheme: dark){
-    :root{ --bg:#0F151B; --card:#18212B; --ink:#E9EEF3; --muted:#9DAAB8;
-           --line:#26323E; --accent-ink:#ABC1D1; }
+    :root{ --bg:#111417; --card:#1A1E22; --ink:#E9EBED; --muted:#9CA3AB;
+           --line:#282D32; --accent-ink:#C2C8CE; }
   }
   *{ box-sizing:border-box; }
   body{
@@ -31,14 +32,15 @@
   .thumb{
     width:88px; height:88px; border-radius:22px; background:var(--accent);
     display:grid; place-items:center; margin:0 auto 16px;
-    box-shadow:0 8px 24px rgba(61,86,110,.18);
+    box-shadow:0 8px 24px rgba(0,0,0,.10);
   }
   .thumb svg{ width:52px; height:52px; }
   h1{ font-size:24px; line-height:1.35; margin:0 0 6px; letter-spacing:-.02em; }
   .sub{ color:var(--muted); font-size:14px; margin:0; }
+  .lede{ color:var(--muted); font-size:14px; margin:12px auto 0; max-width:30em; text-align:left; }
   .badge{
     display:inline-block; padding:2px 9px; border-radius:999px; margin-right:6px;
-    background:var(--accent); color:#1B2430; font-size:12px; font-weight:700; letter-spacing:0;
+    background:var(--accent); color:#1B1F24; font-size:12px; font-weight:700; letter-spacing:0;
   }
 
   .card{
@@ -48,7 +50,7 @@
   h2{ font-size:15px; margin:0 0 12px; letter-spacing:-.01em; }
   h2 .num{
     display:inline-grid; place-items:center; width:22px; height:22px; border-radius:50%;
-    background:var(--accent); color:#1B2430; font-size:12px; font-weight:700;
+    background:var(--accent); color:#1B1F24; font-size:12px; font-weight:700;
     margin-right:8px; vertical-align:-4px;
   }
 
@@ -90,12 +92,14 @@
   <header>
     <div class="thumb">
       <svg viewBox="0 0 100 100" aria-hidden="true">
-        <rect x="14" y="18" width="72" height="50" rx="14" fill="#fff"/>
-        <path d="M38 66 L54 66 L41 86 Z" fill="#fff"/>
+        <rect x="14" y="18" width="72" height="50" rx="14" fill="#2A2F35"/>
+        <path d="M38 66 L54 66 L41 86 Z" fill="#2A2F35"/>
       </svg>
     </div>
-    <h1>커스텀 테마 라이트 모드</h1>
-    <p class="sub"><span class="badge">iOS 전용</span> 아이폰 카카오톡 사용자 테마 · v1.0.1</p>
+    <h1>심플 라이트</h1>
+    <p class="sub"><span class="badge">iOS 전용</span> 아이폰 카카오톡 사용자 테마 · v26.8.0</p>
+    <p class="lede">튜닝의 끝은 순정. 카카오톡 채팅방의 익숙한 느낌은 그대로 두고,
+       인스타그램의 하얀 화면과 군더더기 없는 기본 프로필 인상만 옮겨 왔습니다.</p>
   </header>
 
   <div class="card">
