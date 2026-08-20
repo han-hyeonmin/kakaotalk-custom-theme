@@ -1,21 +1,20 @@
 #!/usr/bin/env python3
 """테마 목록 썸네일(Images/commonIcoTheme.png)을 생성한다.
 
-카카오톡 테마 목록의 아이콘은 iOS 앱 아이콘과 같은 '연속 곡률(continuous corner,
-스쿼클)' 모서리를 쓴다. 단순 원호(circular corner)나 모서리를 깎아낸 듯한 곡선으로
-그리면 기본 테마 아이콘들 사이에서 혼자 곡률이 어긋나 보인다.
+카카오톡은 테마 목록에 썸네일을 그릴 때 자기 라운드 마스크와 테두리를 씌운다.
+그래서 PNG 쪽에서 모서리를 미리 굽지 않는다. 이미지에 곡률을 구워 넣으면 앱
+마스크 안쪽에서 이미지가 먼저 끝나 버려, 그 틈으로 목록 배경(흰색)이 비친다.
+기본 테마 아이콘들과 곡률이 어긋나 보이는 것도 같은 이유다.
 
-여기서는 모서리를 초타원(superellipse)으로 그려 iOS 아이콘 곡률을 재현한다.
+  - 바탕은 162 x 162 를 알파 없이 꽉 채운다 (모서리는 앱이 깎는다)
+  - 안쪽 말풍선 마크만 둥근 사각형으로 그린다. 이때 모서리는 iOS 앱 아이콘과
+    같은 연속 곡률(스쿼클)을 초타원으로 근사한다.
 
-    ((E-x)/E)^n + ((E-y)/E)^n = 1        E = radius x (1 + smoothing)
+        ((E-x)/E)^n + ((E-y)/E)^n = 1        E = radius x (1 + smoothing)
 
-  - radius   = 0.2237 x 변 길이 (iOS 앱 아이콘 규격)
-  - smoothing= 0.6 (Figma 의 corner smoothing 60% 와 같은 값). 곡선이 모서리에서
-               1.6 x radius 만큼 떨어진 지점부터 시작하므로 변과 부드럽게 이어진다.
-  - n        은 위 곡선의 대각선 깊이가 반경 radius 인 원호와 같아지도록 계산한다
-               (E x (1 - 2^(-1/n)) = radius x (1 - 1/sqrt2), smoothing 0.6 이면 n ~ 3.43).
-               곡선이 시작되는 위치만 바깥으로 밀고 모서리가 깎이는 정도는 그대로 두는 것이
-               iOS 연속 곡률의 핵심이다.
+    smoothing 은 Figma 의 corner smoothing 과 같은 값이고, 지수 n 은 곡선의
+    대각선 깊이가 같은 반경의 원호와 일치하도록 계산한다. 곡선이 시작되는
+    위치만 바깥으로 밀리고 모서리가 깎이는 정도는 그대로다.
 
 사용법: python3 tools/make-icon.py [출력경로]
         (기본값: themes/custom-light/Images/commonIcoTheme.png)
@@ -33,8 +32,7 @@ SS = 8                          # 슈퍼샘플링 배율 (안티에일리어싱�
 BG = (171, 193, 209)            # #ABC1D1 - 목록에서 보이는 타일 바탕색
 FG = (255, 255, 254)            # #FFFFFE - 테마의 메인 배경색과 같은 흰색
 
-IOS_RADIUS_RATIO = 0.2237       # iOS 앱 아이콘 모서리 반경 비율
-IOS_SMOOTHING = 0.6             # 연속 곡률 정도
+IOS_SMOOTHING = 0.6             # 연속 곡률 정도 (Figma 의 corner smoothing 과 같은 값)
 
 # 말풍선 마크. docs/index.html 의 파비콘 SVG(100 단위)를 162 로 스케일한 값이다.
 K = SIZE / 100.0
@@ -84,9 +82,9 @@ def build(size=SIZE):
     tail = tail.resize((size, size), Image.BOX)
     mark = Image.composite(Image.new("L", (size, size), 255), mark, tail)
 
+    # 바탕은 모서리를 굽지 않고 꽉 채운다. 라운드 처리는 카카오톡이 한다.
     icon = Image.new("RGBA", (size, size), BG + (255,))
     icon.paste(FG + (255,), (0, 0), mark)
-    icon.putalpha(rounded_mask(size, size, IOS_RADIUS_RATIO * size))
     return icon
 
 
