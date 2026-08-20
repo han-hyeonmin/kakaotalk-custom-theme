@@ -7,3 +7,6 @@ reference/
 
 # 테마 소스 폴더에 생기는 로컬 테스트용 빌드 사본
 themes/**/*.ktheme
+
+# Python
+__pycache__/
