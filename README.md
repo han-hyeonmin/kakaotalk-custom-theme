@@ -54,6 +54,9 @@ themes/
       ├─ commonIcoTheme.png  # 테마 목록에 뜨는 썸네일 (162×162)
       └─ profileImg01@3x.png # 기본 프로필 이미지
 
+tools/
+└─ make-icon.py              # commonIcoTheme.png 생성기
+
 docs/                        # GitHub Pages 로 배포되는 설치 페이지
 └─ download/                 # build.sh 결과물이 놓이는 곳
    └─ custom-light.ktheme
@@ -62,10 +65,22 @@ docs/                        # GitHub Pages 로 배포되는 설치 페이지
 색만 바꾸고 싶다면 `KakaoTalkTheme.css`의 `background-color` 값만 고치면 됩니다.
 `ManifestStyle`의 `-kakaotalk-theme-name`, `-kakaotalk-author-name` 도 본인 것으로 바꿔 주세요.
 
+### 목록 아이콘 (`commonIcoTheme.png`)
+
+테마 목록의 아이콘은 iOS 앱 아이콘과 같은 **연속 곡률(스쿼클)** 모서리를 씁니다.
+반경 `0.2237 × 변 길이`, corner smoothing `0.6` 이 기준이고, 단순 원호나 모서리를
+비스듬히 깎은 곡선으로 그리면 기본 테마 아이콘들 사이에서 혼자 곡률이 어긋나 보입니다.
+
+```bash
+python3 tools/make-icon.py   # Pillow 필요. themes/custom-light/Images/ 에 162×162 로 생성
+```
+
+색·마크는 `tools/make-icon.py` 위쪽 상수(`BG`, `FG`, `BUBBLE`, `TAIL`)만 고치면 됩니다.
+
 ### 버전 규칙
 
 `YY.M.patch` (날짜 기반). 카카오 공식 샘플 테마도 같은 형식을 씁니다 (`Apeach` = `25.8.0`).
-`-kakaotalk-theme-version` 과 릴리스 태그를 같은 값으로 맞춥니다 (현재 `26.8.1` = `v26.8.1`).
+`-kakaotalk-theme-version` 과 릴리스 태그를 같은 값으로 맞춥니다 (현재 `26.8.2` = `v26.8.2`).
 
 같은 달에 두 번 고치면 `26.8.1`. 테마에는 "호환성이 깨지는 변경"이라는 개념이 없어
 semver 의 major/minor 구분이 의미가 없으므로 날짜만 씁니다.
