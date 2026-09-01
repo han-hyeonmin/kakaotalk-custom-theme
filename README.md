@@ -82,7 +82,11 @@ python3 tools/make-icon.py   # Pillow 필요. themes/custom-light/Images/ 에 16
 ### 버전 규칙
 
 `YY.M.patch` (날짜 기반). 카카오 공식 샘플 테마도 같은 형식을 씁니다 (`Apeach` = `25.8.0`).
-`-kakaotalk-theme-version` 과 릴리스 태그를 같은 값으로 맞춥니다 (현재 `26.9.0` = `v26.9.0`).
+`-kakaotalk-theme-version` 과 릴리스 태그를 같은 값으로 맞춥니다 (`26.9.0` ↔ `v26.9.0`).
+
+버전을 올릴 때는 **태그와 GitHub 릴리스를 함께** 만들고, 릴리스에 그 버전의
+`custom-light.ktheme` 를 첨부합니다. 태그만 남기면 릴리스 목록의 "Latest" 가
+실제 배포본과 어긋납니다.
 
 같은 달에 두 번 고치면 `26.8.1`. 테마에는 "호환성이 깨지는 변경"이라는 개념이 없어
 semver 의 major/minor 구분이 의미가 없으므로 날짜만 씁니다.
