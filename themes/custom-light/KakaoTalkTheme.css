@@ -4,7 +4,7 @@
 
 ManifestStyle {
     -kakaotalk-theme-name: '심플 라이트';
-    -kakaotalk-theme-version: '26.9.2';
+    -kakaotalk-theme-version: '26.9.3';
     -kakaotalk-theme-url: 'https://han-hyeonmin.github.io/kakaotalk-custom-theme/';
     -kakaotalk-author-name: 'hyeonmin_han';
     -kakaotalk-theme-id: 'com.kakao.talk.theme.hanhyeonminlight';
@@ -21,28 +21,27 @@ MainViewStyle-Primary {
 
     /* 이 키는 텍스트 색 하나가 아니다. 카카오톡은 같은 값을
      *   - 친구탭 프로필명 / 채팅방 이름
-     *   - 통화 탭 발신 버튼의 원 (100% 꽉 채운 면)
      *   - 더보기탭 그리드 영역 배경과 게임플레이 배경 (알파 6%)
-     * 에 함께 쓴다. 가이드는 이 중 그리드 배경만 적어 두었고 통화 버튼은 없다.
-     * 기기에서 픽셀을 재서 확인했다.
+     * 에 함께 쓴다. 그래서 그리드 타일만 따로 옅게 만들 수 없다.
      *
-     * 통화 버튼은 텍스트가 아니라 면이라 같은 값이어도 훨씬 무겁게 읽힌다.
-     * 그 원을 옅게 하려고 #666666 에서 한 단계 더 올렸다. 대가로 리스트 이름이
-     * 3.5:1 이 되어 WCAG AA(4.5:1) 아래로 내려간다. 가독성을 내주고 면을
-     * 가볍게 하는 쪽을 택한 것이다.
+     * 타일과 배경의 차이는 0.06 x (배경 - T) 라 배경색과 무관하고 T 만이 정한다.
+     * 기본값(거의 검정)이면 #FFFFFF 위에서 #EFEFEF, 델타 15 로 얼룩처럼 뜬다.
+     * #666666 은 델타를 9 로 줄이면서 본문 대비 5.7:1 을 지켜 WCAG AA 를 통과하는
+     * 한계선이다. 더 내리면 (#757575 = 4.6:1) 대비 여유가 급격히 줄어든다.
      *
-     * 되돌리려면 #666666 (이름 5.7:1, AA 통과) 으로 내리면 된다. 그때는 아래
-     * 보조 텍스트도 #8E8E93 으로 함께 되돌려야 단차가 맞는다. */
-    -ios-text-color: #8A8A8A;
-    -ios-highlighted-text-color: #ADADAD;       /* 프레스. 눌렀을 때 진해지는 역전 방지 */
+     * 통화 탭 발신 버튼의 회색 원도 이 키라고 판단해 26.9.2 에서 #8A8A8A 까지
+     * 올려 봤으나 원은 그대로였다. 스크린샷에서 잰 #666666 은 우연의 일치였고,
+     * 그 원은 이 키가 아니다. 26.9.1 값으로 되돌린다. */
+    -ios-text-color: #666666;
+    -ios-highlighted-text-color: #8A8A8A;       /* 프레스. 눌렀을 때 진해지는 역전 방지 */
 
-    /* 이름이 #8A8A8A 까지 올라가서 보조 텍스트도 함께 내린다.
-     * 그냥 두면 (#8E8E93) 이름과 4단계 차이라 색으로는 구분이 사라진다.
-     * 이름 3.5:1 / 보조 2.4:1 로 단차를 만들고, 나머지는 굵기와 크기가 맡는다. */
-    -ios-paragraph-text-color: #A8A8A8;                 /* 라스트메시지 */
-    -ios-paragraph-highlighted-text-color: #C4C4C4;
-    -ios-description-text-color: #A8A8A8;               /* 상태메시지 */
-    -ios-description-highlighted-text-color: #C4C4C4;
+    /* 이름을 #666666 까지 올린 대가로 보조 텍스트를 명시적으로 한 칸 더 내린다.
+     * 그냥 두면 카카오톡 기본 라스트메시지 회색과 이름이 붙어 위계가 무너진다.
+     * 이름 5.7:1 / 보조 3.5:1 로 단차를 만든다. */
+    -ios-paragraph-text-color: #8E8E93;                 /* 라스트메시지 */
+    -ios-paragraph-highlighted-text-color: #B0B0B5;
+    -ios-description-text-color: #8E8E93;               /* 상태메시지 */
+    -ios-description-highlighted-text-color: #B0B0B5;
 }
 
 

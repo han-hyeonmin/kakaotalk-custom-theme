@@ -15,10 +15,11 @@
   :root{
     --bg:#F5F6F7; --card:#FFFFFF; --ink:#1B1F24; --muted:#5F6771;
     --line:#E5E7E9; --accent:#E7E9EB; --accent-ink:#4B535D; --kakao:#FEE500; --kakao-ink:#191600;
+    --danger:#B3261E;
   }
   @media (prefers-color-scheme: dark){
     :root{ --bg:#111417; --card:#1A1E22; --ink:#E9EBED; --muted:#9CA3AB;
-           --line:#282D32; --accent-ink:#C2C8CE; }
+           --line:#282D32; --accent-ink:#C2C8CE; --danger:#F2B8B5; }
   }
   *{ box-sizing:border-box; }
   body{
@@ -69,6 +70,15 @@
   .btn[disabled]{ opacity:.5; }
   .hint{ font-size:13px; color:var(--muted); margin:10px 2px 0; }
   #status{ font-size:13px; color:var(--accent-ink); margin:10px 2px 0; min-height:1.2em; }
+  #status.ok, #status.err{
+    margin-top:12px; padding:12px 14px; border-radius:12px;
+    border:1px solid var(--line); background:var(--bg);
+    font-size:14px; line-height:1.55; color:var(--ink);
+  }
+  #status.ok{ border-color:var(--ink); }
+  #status.ok b{ font-weight:700; }
+  #status.ok .steps{ display:block; margin-top:6px; color:var(--muted); font-size:13px; }
+  #status.err{ border-color:var(--danger); color:var(--danger); }
 
   ol{ margin:0; padding-left:20px; }
   ol li{ margin-bottom:10px; }
@@ -97,7 +107,7 @@
       </svg>
     </div>
     <h1>심플 라이트</h1>
-    <p class="sub"><span class="badge" id="badge">카카오톡 사용자 테마</span> v26.9.2</p>
+    <p class="sub"><span class="badge" id="badge">카카오톡 사용자 테마</span> v26.9.3</p>
     <p class="lede">튜닝의 끝은 순정. 카카오톡 채팅방의 익숙한 느낌은 그대로 두고,
        인스타그램의 하얀 화면과 군더더기 없는 기본 프로필 인상만 옮겨 왔습니다.</p>
   </header>
@@ -211,7 +221,10 @@
   var status = document.getElementById('status');
   var badge = document.getElementById('badge');
 
-  function say(msg) { status.textContent = msg || ''; }
+  function say(msg, kind) {
+    status.className = msg ? (kind || '') : '';
+    if (kind === 'ok') { status.innerHTML = msg; } else { status.textContent = msg || ''; }
+  }
   function show(id, on) { document.getElementById(id).hidden = !on; }
 
   // 기기에 따라 안내를 나눈다. 안드로이드 테마는 APK 라 설치 경로가 완전히 다르다.
@@ -234,7 +247,7 @@
   // 데스크톱/미지원 브라우저에서는 공유 버튼 대신 다운로드를 안내한다.
   if (!(navigator.canShare && navigator.share)) {
     btn.disabled = true;
-    say('이 브라우저에서는 바로 공유할 수 없습니다. 아이폰 Safari로 이 페이지를 열거나, 아래에서 파일을 내려받아 카카오톡 채팅방으로 보내세요.');
+    say('이 브라우저는 바로 공유를 지원하지 않습니다. 아이폰 <b>사파리</b>로 이 페이지를 열면 버튼이 켜집니다. 그대로 쓰시려면 아래에서 파일을 내려받아 카카오톡 “나에게”로 보내세요.', 'ok');
     return;
   }
 
@@ -252,12 +265,15 @@
       }
       say('');
       await navigator.share({ files: [file] });
-      say('공유했습니다. 채팅방에서 파일을 탭하고 “테마 적용하기”를 누르세요.');
+      say('<b>전송했습니다. 아직 적용되지 않았습니다.</b>' +
+          '<span class="steps">카카오톡 앱으로 이동 → 방금 보낸 채팅방을 열기 →' +
+          ' <b>custom-light.ktheme</b> 파일을 <b>탭</b> → <b>「테마 적용하기」</b> →' +
+          ' 카카오톡이 다시 시작되면 완료됩니다.</span>', 'ok');
     } catch (err) {
       if (err && err.name === 'AbortError') {
         say('');            // 사용자가 공유를 취소함
       } else {
-        say('공유에 실패했습니다. 아래 “파일로 직접 내려받기”를 이용해 주세요.');
+        say('공유하지 못했습니다. 아래 “파일로 직접 내려받기”로 파일을 받은 뒤, 카카오톡 “나에게”로 보내 주세요.', 'err');
       }
     } finally {
       btn.disabled = false;
