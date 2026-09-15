@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  심플 라이트 — 안드로이드 카카오톡 사용자 테마
+
+  카카오톡 안드로이드 테마는 색을 "선언하지 않고 기본값에 맡기기"가 불가능하다.
+  theme-adv/ 의 셀렉터들이 아래 이름들을 @color/... 로 참조하므로 하나라도
+  빠지면 빌드가 깨진다. 그래서 44개를 전부 지정한다. iOS 쪽(KakaoTalkTheme.css)이
+  네 곳만 선언하고 나머지를 카카오 기본값에 맡기는 것과 다른 점이다.
+
+  팔레트 (인스타그램 램프 기준, 무채색 6단)
+    #FFFFFF  기본 배경     메인/탭바/헤더/잠금화면, 그리고 인풋바/배너
+                 기본 면이 순백이라 '더 떠 있는 면'을 만들 여지가 없다.
+                 인풋바와 배너는 배경과 같은 색이고 보더로 구분된다.
+    #F7F7F7  살짝 가라앉은 면  키패드
+    #F2F2F2  가라앉은 면   채팅방, 프레스 배경
+    #DBDBDB  보더
+    #A8A8A8  보조 텍스트 프레스
+    #737373  보조 텍스트
+    #262626  주 텍스트
+-->
+<resources>
+
+    <!-- Header : 메인탭 헤더 타이틀 -->
+    <color name="theme_header_color">#262626</color>                            <!--Default-->
+
+    <!-- Section Title : 섹션 헤더 타이틀 -->
+    <color name="theme_section_title_color">#737373</color>                     <!--Default-->
+
+    <!-- Title : 이름 -->
+    <color name="theme_title_color">#262626</color>                             <!--Default-->
+    <color name="theme_title_pressed_color">#737373</color>                     <!--Pressed-->
+
+    <!-- Paragraph : 라스트메세지 -->
+    <color name="theme_paragraph_color">#737373</color>                         <!--Default-->
+    <color name="theme_paragraph_pressed_color">#A8A8A8</color>                 <!--Pressed-->
+
+    <!-- Description : 상태메세지 -->
+    <color name="theme_description_color">#737373</color>                       <!--Default-->
+    <color name="theme_description_pressed_color">#A8A8A8</color>               <!--Pressed-->
+
+
+    <!-- Feature : 서비스/피처별 컬러 -->
+
+    <!-- Primary : 멜론/선물하기 등 버튼 텍스트 -->
+    <color name="theme_feature_primary_color">#262626</color>                   <!--Default-->
+    <color name="theme_feature_primary_pressed_color">#737373</color>           <!--Pressed-->
+
+    <!-- Services : Browse 3탭 -->
+    <color name="theme_feature_browse_tab_color">#A8A8A8</color>                <!--Default-->
+    <color name="theme_feature_browse_tab_focused_color">#262626</color>        <!--Focused-->
+
+
+    <!-- Background -->
+    <!-- 기본. drawable 의 theme_background_image.png 를 지우면
+         theme-adv/drawable/theme_background_image.xml 의 <solid> 가 이 색을 쓴다 -->
+    <color name="theme_background_color">#FFFFFF</color>
+    <!-- 채팅방. iOS 판은 채팅방을 손대지 않지만 안드로이드는 값을 비울 수 없다.
+         말풍선 9-patch 를 따로 넣지 않으므로 카카오톡 기본 말풍선(노랑/흰색)이
+         그대로 얹힌다는 전제로 고른 값이다. 기기에서 확인할 것. -->
+    <color name="theme_chatroom_background_color">#F2F2F2</color>
+    <!-- 잠금화면 -->
+    <color name="theme_passcode_background_color">#FFFFFF</color>
+
+
+    <!-- Cell Color -->
+
+    <!-- Header : 메인탭 헤더 타이틀 셀 -->
+    <color name="theme_header_cell_color">#FFFFFF</color>
+
+    <!-- Body : 기본리스트 & 콘텐츠영역 셀. 배경이 비쳐야 하므로 투명(알파 00) -->
+    <color name="theme_body_cell_color">#00FFFFFF</color>
+    <color name="theme_body_cell_pressed_color">#F2F2F2</color>
+    <color name="theme_body_cell_border_color">#DBDBDB</color>
+
+    <!-- Body Secondary : 발견 & 더보기 콘텐츠 영역 셀 -->
+    <color name="theme_body_secondary_cell_color">#FFFFFF</color>
+
+    <!-- Tab : 메인탭 탭바 -->
+    <color name="theme_maintab_cell_color">#FFFFFF</color>
+    <color name="theme_tab_lightbannerbadge_background_color">#262626</color>
+
+    <!-- Tab : 배너. 가이드가 어두운 색을 권장한다 -->
+    <color name="theme_tab_bannerbadge_background_color">#262626</color>
+
+
+    <!-- Elements Color -->
+
+    <!-- Direct Share BG -->
+    <color name="theme_direct_share_color">#262626</color>
+    <color name="theme_direct_share_button_color">#737373</color>
+    <color name="theme_direct_share_background_color">#FFFFFF</color>
+
+    <!-- Notification Popup/Toast -->
+    <color name="theme_notification_color">#262626</color>
+    <color name="theme_notification_background_color">#FFFFFF</color>
+    <color name="theme_notification_background_pressed_color">#F2F2F2</color>
+
+
+    <!-- Passcode -->
+    <color name="theme_passcode_color">#262626</color>
+
+    <color name="theme_passcode_keypad_color">#262626</color>
+    <color name="theme_passcode_keypad_pressed_color">#737373</color>
+    <color name="theme_passcode_keypad_background_color">#F7F7F7</color>
+    <!-- #aarrggbb — 60% 불투명한 가라앉은 회색 -->
+    <color name="theme_passcode_keypad_pressed_background_color">#99EBEBEB</color>
+
+    <color name="theme_passcode_pattern_line_color">#737373</color>
+
+
+    <!-- Chatroom -->
+
+    <!-- Chat Bubble : 말풍선 '안의 글자색'이다(말풍선 배경은 9-patch 이미지).
+         9-patch 를 넣지 않으면 카카오톡 기본 말풍선이 쓰이므로,
+         노란 말풍선/흰 말풍선 양쪽에서 읽히는 진회색으로 맞춘다 -->
+
+    <!-- Me -->
+    <color name="theme_chatroom_bubble_me_color">#262626</color>
+
+    <!-- You -->
+    <color name="theme_chatroom_bubble_you_color">#262626</color>
+
+    <!-- Chat Unread Count -->
+    <color name="theme_chatroom_unread_count_color">#737373</color>
+
+    <!-- Input Bar -->
+    <color name="theme_chatroom_input_bar_color">#262626</color>
+    <color name="theme_chatroom_input_bar_background_color">#FFFFFF</color>
+    <color name="theme_chatroom_input_bar_menu_icon_color">#262626</color>
+    <!-- 검정 4% -->
+    <color name="theme_chatroom_input_bar_menu_button_color">#0A000000</color>
+    <color name="theme_chatroom_input_bar_send_icon_color">#FFFFFF</color>
+    <color name="theme_chatroom_input_bar_send_button_color">#262626</color>
+
+</resources>

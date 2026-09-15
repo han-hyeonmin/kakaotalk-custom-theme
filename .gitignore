@@ -10,3 +10,6 @@ themes/**/*.ktheme
 
 # Python
 __pycache__/
+
+# 안드로이드 테마 빌드 산출물 (카카오 샘플 사본이라 재배포하지 않는다)
+android/build/
