@@ -114,37 +114,46 @@
 
   <div id="ios-flow">
   <div class="card">
-    <h2><span class="num">1</span>카카오톡으로 보내기</h2>
-    <button id="share" class="btn btn-kakao">
+    <h2><span class="num">1</span>테마 받기</h2>
+    <!-- download 속성을 붙이면 파일 앱에 저장돼 버려 카카오톡이 받지 못한다.
+         평범한 링크여야 카카오톡이 .ktheme 를 직접 받아 안내창을 띄운다. -->
+    <a id="open" class="btn btn-kakao" href="download/custom-light.ktheme">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
         <path d="M12 3C6.9 3 2.8 6.3 2.8 10.3c0 2.6 1.7 4.8 4.3 6.1l-1 3.8c-.1.3.2.6.5.4l4.5-3c.3 0 .6.1.9.1 5.1 0 9.2-3.3 9.2-7.4S17.1 3 12 3z"/>
       </svg>
-      카카오톡으로 테마 공유하기
-    </button>
-    <a id="download" class="btn btn-ghost" href="download/custom-light.ktheme" download="custom-light.ktheme">
-      파일로 직접 내려받기
+      테마 받기
     </a>
     <p id="status"></p>
     <p class="hint">
-      공유 시트가 열리면 <b>카카오톡 → 나에게</b>를 고르세요.
-      나에게 보내 두면 언제든 다시 적용할 수 있습니다.
+      누르면 <span class="kbd">테마 다운로드 완료</span> 안내창이 바로 뜹니다.
     </p>
+
+    <details>
+      <summary>파일로 저장하고 싶다면</summary>
+      <p><a href="download/custom-light.ktheme" download="custom-light.ktheme">custom-light.ktheme 내려받기</a>
+         — 파일 앱에 저장됩니다. 다만 저장을 거치면 확장자가 <code>.zip</code>으로
+         바뀌어 인식되지 않는 경우가 있으니, 위 버튼을 쓰는 편이 확실합니다.</p>
+    </details>
   </div>
 
   <div class="card">
-    <h2><span class="num">2</span>채팅방에서 적용하기</h2>
+    <h2><span class="num">2</span>목록에서 고르기</h2>
     <ol>
-      <li>보낸 <b>custom-light.ktheme</b> 파일을 <b>탭</b>합니다.</li>
-      <li>안내창에서 <span class="kbd">테마 적용하기</span>를 누릅니다.</li>
+      <li><span class="kbd">테마 다운로드 완료</span> 안내창에서
+          <span class="kbd">테마 목록보기</span>를 누릅니다.</li>
+      <li>목록에서 <b>심플 라이트</b>를 고릅니다.</li>
       <li>카카오톡이 다시 시작되면 적용 완료입니다.</li>
     </ol>
 
     <details>
-      <summary>버튼이 안 뜨거나 파일이 열리지 않아요</summary>
+      <summary>안내창이 안 뜨거나 파일이 열리지 않아요</summary>
       <ol>
-        <li><b>이 <code>.ktheme</code> 파일은 Android·PC 카카오톡에서 적용되지 않습니다.</b> iOS 전용 형식이라 아이폰(또는 아이패드) 앱에서 열어야 합니다. 안드로이드는 별도 APK 소스를 빌드해야 합니다.</li>
-        <li>파일을 다운로드 앱이나 파일 앱을 거쳐 열면 확장자가 <code>.zip</code>으로
-            바뀌는 경우가 있습니다. 이때는 <b>채팅방에 공유해서 바로 탭</b>하는 방법을 쓰세요.</li>
+        <li><b>카카오톡 안에서 이 페이지를 여는 게 가장 확실합니다.</b>
+            링크를 <b>나에게</b>로 보낸 뒤 눌러 보세요.</li>
+        <li>사파리에서 열었다면 <span class="kbd">카카오톡으로 열기</span> 버튼이 대신 뜹니다.
+            그걸 눌러도 같은 안내창으로 이어집니다.</li>
+        <li><b>이 <code>.ktheme</code> 파일은 Android·PC 카카오톡에서 적용되지 않습니다.</b>
+            iOS 전용 형식입니다. 안드로이드는 별도 APK 소스를 빌드해야 합니다.</li>
         <li>카카오톡 버전이 낮으면 인식하지 못할 수 있습니다. 최신 버전으로 업데이트하세요.</li>
       </ol>
     </details>
@@ -152,7 +161,8 @@
     <details>
       <summary>원래 테마로 되돌리려면</summary>
       <p>카카오톡 <span class="kbd">더보기 ⋯</span> → <span class="kbd">설정 ⚙︎</span> →
-         <span class="kbd">테마</span>에서 <b>기본 테마</b>를 선택하면 됩니다.</p>
+         <span class="kbd">테마</span>에서 <b>기본 테마</b>를 선택하면 됩니다.
+         한 번 받아 둔 테마는 목록에 남아 있어 언제든 다시 고를 수 있습니다.</p>
     </details>
   </div>
   </div><!-- /ios-flow -->
@@ -215,15 +225,12 @@
 
 <script>
 (function () {
-  var FILE = 'download/custom-light.ktheme';
-  var NAME = 'custom-light.ktheme';
-  var btn = document.getElementById('share');
   var status = document.getElementById('status');
   var badge = document.getElementById('badge');
 
   function say(msg, kind) {
-    status.className = msg ? (kind || '') : '';
-    if (kind === 'ok') { status.innerHTML = msg; } else { status.textContent = msg || ''; }
+    status.className = kind || '';
+    status.innerHTML = msg || '';
   }
   function show(id, on) { document.getElementById(id).hidden = !on; }
 
@@ -242,43 +249,21 @@
   }
 
   badge.textContent = isIOS ? 'iPhone · iPad' : '카카오톡 사용자 테마';
-  if (!isIOS) show('desktop-note', true);
 
-  // 데스크톱/미지원 브라우저에서는 공유 버튼 대신 다운로드를 안내한다.
-  if (!(navigator.canShare && navigator.share)) {
-    btn.disabled = true;
-    say('이 브라우저는 바로 공유를 지원하지 않습니다. 아이폰 <b>사파리</b>로 이 페이지를 열면 버튼이 켜집니다. 그대로 쓰시려면 아래에서 파일을 내려받아 카카오톡 “나에게”로 보내세요.', 'ok');
+  if (!isIOS) {
+    show('desktop-note', true);
+    say('<b>데스크톱에서는 적용할 수 없습니다.</b>' +
+        '<span class="steps">이 페이지 주소를 아이폰으로 보내거나, 아이폰 사파리에서 ' +
+        '<b>han-hyeonmin.github.io/kakaotalk-custom-theme</b> 를 직접 여세요.</span>', 'ok');
     return;
   }
 
-  btn.addEventListener('click', async function () {
-    btn.disabled = true;
-    say('테마 파일을 준비하는 중…');
-    try {
-      var res = await fetch(FILE, { cache: 'no-store' });
-      if (!res.ok) throw new Error('HTTP ' + res.status);
-      var blob = await res.blob();
-      var file = new File([blob], NAME, { type: 'application/octet-stream' });
-
-      if (!navigator.canShare({ files: [file] })) {
-        throw new Error('unsupported');
-      }
-      say('');
-      await navigator.share({ files: [file] });
-      say('<b>전송했습니다. 아직 적용되지 않았습니다.</b>' +
-          '<span class="steps">카카오톡 앱으로 이동 → 방금 보낸 채팅방을 열기 →' +
-          ' <b>custom-light.ktheme</b> 파일을 <b>탭</b> → <b>「테마 적용하기」</b> →' +
-          ' 카카오톡이 다시 시작되면 완료됩니다.</span>', 'ok');
-    } catch (err) {
-      if (err && err.name === 'AbortError') {
-        say('');            // 사용자가 공유를 취소함
-      } else {
-        say('공유하지 못했습니다. 아래 “파일로 직접 내려받기”로 파일을 받은 뒤, 카카오톡 “나에게”로 보내 주세요.', 'err');
-      }
-    } finally {
-      btn.disabled = false;
-    }
-  });
+  // 카카오톡 인앱 브라우저가 .ktheme 를 직접 받아 안내창을 띄운다. 가장 짧은 경로다.
+  if (!/KAKAOTALK/i.test(ua)) {
+    say('카카오톡 안에서 이 페이지를 열면 가장 확실합니다. ' +
+        '링크를 <b>나에게</b>로 보낸 뒤 눌러 보세요. 사파리에서는 ' +
+        '<b>카카오톡으로 열기</b> 버튼이 대신 뜹니다.');
+  }
 })();
 </script>
 </body>
