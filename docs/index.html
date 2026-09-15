@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>심플 라이트 · iOS 카카오톡 테마</title>
-<meta name="description" content="iOS 카카오톡 사용자 테마 '심플 라이트' — 튜닝의 끝은 순정. 아이폰에서 버튼 한 번으로 카카오톡에 공유하고 바로 적용하세요.">
+<title>심플 라이트 · 카카오톡 사용자 테마</title>
+<meta name="description" content="카카오톡 사용자 테마 '심플 라이트' — 튜닝의 끝은 순정. 아이폰은 버튼 한 번으로 적용하고, 안드로이드는 소스를 직접 빌드합니다.">
 <meta name="theme-color" content="#F5F6F7" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#111417" media="(prefers-color-scheme: dark)">
-<meta property="og:title" content="심플 라이트 · iOS 카카오톡 테마">
-<meta property="og:description" content="튜닝의 끝은 순정 — 카카오톡 느낌은 그대로 두고 하얀 화면만 옮겨 온 iOS 전용 라이트 테마">
+<meta property="og:title" content="심플 라이트 · 카카오톡 사용자 테마">
+<meta property="og:description" content="튜닝의 끝은 순정 — 카카오톡 느낌은 그대로 두고 하얀 화면만 옮겨 온 라이트 테마">
 <meta property="og:type" content="website">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='23' fill='%23E7E9EB'/><rect x='20' y='24' width='60' height='42' rx='12' fill='%232A2F35'/><path d='M40 64 L53 64 L42 80 Z' fill='%232A2F35'/></svg>">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='23' fill='%23262626'/><rect x='20' y='24' width='60' height='42' rx='12' fill='%23FFFFFF'/><path d='M40 64 L53 64 L42 80 Z' fill='%23FFFFFF'/></svg>">
 <style>
   :root{
     --bg:#F5F6F7; --card:#FFFFFF; --ink:#1B1F24; --muted:#5F6771;
@@ -30,7 +30,7 @@
   .wrap{ max-width:520px; margin:0 auto; }
   header{ text-align:center; padding:14px 0 26px; }
   .thumb{
-    width:88px; height:88px; border-radius:22px; background:var(--accent);
+    width:88px; height:88px; border-radius:22px; background:#262626;
     display:grid; place-items:center; margin:0 auto 16px;
     box-shadow:0 8px 24px rgba(0,0,0,.10);
   }
@@ -92,16 +92,17 @@
   <header>
     <div class="thumb">
       <svg viewBox="0 0 100 100" aria-hidden="true">
-        <rect x="14" y="18" width="72" height="50" rx="14" fill="#2A2F35"/>
-        <path d="M38 66 L54 66 L41 86 Z" fill="#2A2F35"/>
+        <rect x="14" y="18" width="72" height="50" rx="14" fill="#FFFFFF"/>
+        <path d="M38 66 L54 66 L41 86 Z" fill="#FFFFFF"/>
       </svg>
     </div>
     <h1>심플 라이트</h1>
-    <p class="sub"><span class="badge">iOS 전용</span> 아이폰 카카오톡 사용자 테마 · v26.9.0</p>
+    <p class="sub"><span class="badge" id="badge">카카오톡 사용자 테마</span> v26.9.1</p>
     <p class="lede">튜닝의 끝은 순정. 카카오톡 채팅방의 익숙한 느낌은 그대로 두고,
        인스타그램의 하얀 화면과 군더더기 없는 기본 프로필 인상만 옮겨 왔습니다.</p>
   </header>
 
+  <div id="ios-flow">
   <div class="card">
     <h2><span class="num">1</span>카카오톡으로 보내기</h2>
     <button id="share" class="btn btn-kakao">
@@ -131,7 +132,7 @@
     <details>
       <summary>버튼이 안 뜨거나 파일이 열리지 않아요</summary>
       <ol>
-        <li><b>Android·PC 카카오톡에서는 적용되지 않습니다.</b> iOS 카카오톡 전용 형식이라 아이폰(또는 아이패드) 앱에서 열어야 합니다.</li>
+        <li><b>이 <code>.ktheme</code> 파일은 Android·PC 카카오톡에서 적용되지 않습니다.</b> iOS 전용 형식이라 아이폰(또는 아이패드) 앱에서 열어야 합니다. 안드로이드는 별도 APK 소스를 빌드해야 합니다.</li>
         <li>파일을 다운로드 앱이나 파일 앱을 거쳐 열면 확장자가 <code>.zip</code>으로
             바뀌는 경우가 있습니다. 이때는 <b>채팅방에 공유해서 바로 탭</b>하는 방법을 쓰세요.</li>
         <li>카카오톡 버전이 낮으면 인식하지 못할 수 있습니다. 최신 버전으로 업데이트하세요.</li>
@@ -143,6 +144,45 @@
       <p>카카오톡 <span class="kbd">더보기 ⋯</span> → <span class="kbd">설정 ⚙︎</span> →
          <span class="kbd">테마</span>에서 <b>기본 테마</b>를 선택하면 됩니다.</p>
     </details>
+  </div>
+  </div><!-- /ios-flow -->
+
+  <div id="android-flow" hidden>
+    <div class="card">
+      <h2><span class="num">!</span>안드로이드는 직접 빌드해야 합니다</h2>
+      <p class="lede" style="margin-top:0">
+        안드로이드 카카오톡 테마는 <b>APK(앱)</b> 형식이라, 아이폰처럼 파일 하나를
+        공유해서 바로 적용할 수 없습니다. 소스는 공개돼 있으니 직접 빌드해 주세요.
+      </p>
+      <a class="btn btn-ghost" style="margin-top:14px"
+         href="https://github.com/han-hyeonmin/kakaotalk-custom-theme/tree/main/android">
+        안드로이드 소스와 빌드 방법 보기
+      </a>
+      <p class="hint">
+        <b>JDK 21</b>과 <b>Android SDK 35</b>가 필요합니다.
+        카카오 공식 샘플 테마를 받아 <code>apply.sh</code>를 돌리고
+        <code>./gradlew assembleDebug</code> 하면 APK 가 나옵니다.
+      </p>
+    </div>
+
+    <div class="card">
+      <details>
+        <summary>왜 바로 받을 수 있게 해두지 않았나요</summary>
+        <p>APK 를 배포하려면 받는 쪽에서 <b>「알 수 없는 출처의 앱 설치」</b>를 허용해야 하고,
+           브라우저도 APK 다운로드에 경고를 띄웁니다. 개인이 만든 테마를 그렇게까지 해서
+           설치하시라고 권하기엔 부담이 커서, 소스만 공개하고 빌드는 각자에게 맡겼습니다.</p>
+        <p>iOS 판은 <code>.ktheme</code> 가 앱이 아니라 카카오톡이 읽는 설정 파일이라
+           이런 문제가 없습니다.</p>
+      </details>
+    </div>
+  </div>
+
+  <div id="desktop-note" class="card" hidden>
+    <p class="hint" style="margin:0">
+      데스크톱에서 보고 계십니다. 아이폰이라면 이 페이지를 <b>사파리로</b> 열어 주세요.
+      안드로이드는 테마가 APK 형식이라
+      <a href="https://github.com/han-hyeonmin/kakaotalk-custom-theme/tree/main/android">소스를 직접 빌드</a>해야 합니다.
+    </p>
   </div>
 
   <div class="card">
@@ -169,8 +209,27 @@
   var NAME = 'custom-light.ktheme';
   var btn = document.getElementById('share');
   var status = document.getElementById('status');
+  var badge = document.getElementById('badge');
 
   function say(msg) { status.textContent = msg || ''; }
+  function show(id, on) { document.getElementById(id).hidden = !on; }
+
+  // 기기에 따라 안내를 나눈다. 안드로이드 테마는 APK 라 설치 경로가 완전히 다르다.
+  var ua = navigator.userAgent;
+  // iPadOS 는 사파리에서 자신을 Macintosh 로 보고하므로 터치 지원 여부로 가른다.
+  var isIOS = /iPad|iPhone|iPod/.test(ua) ||
+              (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1);
+  var isAndroid = /Android/.test(ua);
+
+  if (isAndroid) {
+    show('ios-flow', false);
+    show('android-flow', true);
+    badge.textContent = '안드로이드 · 소스 빌드';
+    return;
+  }
+
+  badge.textContent = isIOS ? 'iPhone · iPad' : '카카오톡 사용자 테마';
+  if (!isIOS) show('desktop-note', true);
 
   // 데스크톱/미지원 브라우저에서는 공유 버튼 대신 다운로드를 안내한다.
   if (!(navigator.canShare && navigator.share)) {

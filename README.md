@@ -1,16 +1,22 @@
 # 심플 라이트 (카카오톡 사용자 테마)
 
-> **📱 iOS 카카오톡 전용입니다.** Android·PC 카카오톡은 테마 형식이 달라 적용되지 않습니다.
+> **📱 `.ktheme` 는 iOS 전용입니다.** 안드로이드 카카오톡 테마는 APK 형식이라 따로 빌드해야 합니다 — [`android/`](android/) 참고. PC 카카오톡은 지원하지 않습니다.
 
-튜닝의 끝은 순정. 카카오톡 채팅방의 익숙한 느낌은 그대로 두고, 인스타그램의 하얀 화면과
-군더더기 없는 기본 프로필 인상만 옮겨 왔습니다. 메인·탭바를 인스타그램과 같은 오프화이트(`#FAFAFA`)로
-맞추고 기본 프로필 이미지를 바꾼 게 전부이며, 나머지는 모두 카카오톡 기본값입니다.
+튜닝의 끝은 순정. 카카오톡 채팅방의 익숙한 느낌은 그대로 두고, 하얀 화면과
+군더더기 없는 기본 프로필 인상만 옮겨 왔습니다. 채팅방·말풍선·탭 아이콘은 모두 카카오톡 기본값입니다.
 
 |  | 값 |
 |---|---|
-| 메인 / 탭바 배경 | `#FAFAFA` |
+| 메인 / 탭바 배경 | `#FFFFFF` |
+| 리스트 이름 | `#666666` |
+| 라스트메시지 · 상태메시지 | `#8E8E93` |
 | 기본 프로필 이미지 | `profileImg01@3x.png` |
-| 지원 | **iOS 카카오톡 전용** (iPhone / iPad) |
+| 지원 | iOS는 `.ktheme` 즉시 적용 · Android는 [소스 빌드](android/) |
+
+> **왜 이름이 회색인가** — 더보기탭 그리드 타일 배경은 `-ios-text-color`를 6%로 깐
+> 값이라, 타일만 옅게 만들 방법이 없습니다. 타일을 옅게 하려면 그 키를 올릴 수밖에 없고,
+> 그러면 리스트 이름도 함께 옅어집니다. `#666666`은 WCAG AA(4.5:1)를 지키는 한계선입니다.
+> 자세한 계산은 `themes/custom-light/KakaoTalkTheme.css` 주석에 적어 두었습니다.
 
 ---
 
@@ -37,7 +43,8 @@
 
 ## ⚠️ 안 될 때 확인할 것
 
-- **Android·PC 카카오톡에서는 적용되지 않습니다.** iOS 카카오톡 전용 형식입니다.
+- **이 `.ktheme` 파일은 Android·PC 카카오톡에서 적용되지 않습니다.** iOS 전용 형식입니다.
+  안드로이드는 [`android/`](android/) 의 소스를 직접 빌드해야 합니다.
 - 파일 앱이나 다운로드 매니저를 거치면 확장자가 `.zip`으로 바뀌는 경우가 있습니다.
   이때는 **채팅방에 공유해서 바로 탭**하는 경로를 쓰세요.
 - 되돌리기: `더보기 ⋯` → `설정 ⚙︎` → `테마` → **기본 테마** 선택
@@ -57,12 +64,18 @@ themes/
 tools/
 └─ make-icon.py              # commonIcoTheme.png 생성기
 
+android/                     # 안드로이드 판 (APK 소스. 카카오 샘플 위에 얹는다)
+├─ theme/values/colors.xml   # 무채색 44색
+├─ apply.sh                  # 샘플에 얹고 어피치 아트워크를 걷어낸다
+└─ make-splash.py            # 테마 앱 실행화면을 단색으로
+
 docs/                        # GitHub Pages 로 배포되는 설치 페이지
 └─ download/                 # build.sh 결과물이 놓이는 곳
    └─ custom-light.ktheme
 ```
 
 색만 바꾸고 싶다면 `KakaoTalkTheme.css`의 `background-color` 값만 고치면 됩니다.
+안드로이드 판은 [`android/README.md`](android/README.md) 를 보세요.
 `ManifestStyle`의 `-kakaotalk-theme-name`, `-kakaotalk-author-name` 도 본인 것으로 바꿔 주세요.
 
 ### 목록 아이콘 (`commonIcoTheme.png`)
@@ -81,8 +94,8 @@ python3 tools/make-icon.py   # Pillow 필요. themes/custom-light/Images/ 에 16
 
 ### 버전 규칙
 
-`YY.M.patch` (날짜 기반). 카카오 공식 샘플 테마도 같은 형식을 씁니다 (`Apeach` = `25.8.0`).
-`-kakaotalk-theme-version` 과 릴리스 태그를 같은 값으로 맞춥니다 (`26.9.0` ↔ `v26.9.0`).
+`YY.M.patch` (날짜 기반). 카카오 공식 샘플 테마도 같은 형식을 씁니다 (`Apeach` = `26.7.0`).
+`-kakaotalk-theme-version` 과 릴리스 태그를 같은 값으로 맞춥니다 (`26.9.1` ↔ `v26.9.1`).
 
 버전을 올릴 때는 **태그와 GitHub 릴리스를 함께** 만들고, 릴리스에 그 버전의
 `custom-light.ktheme` 를 첨부합니다. 태그만 남기면 릴리스 목록의 "Latest" 가
