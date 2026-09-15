@@ -22,6 +22,7 @@
            --line:#282D32; --accent-ink:#C2C8CE; --danger:#F2B8B5; }
   }
   *{ box-sizing:border-box; }
+  [hidden]{ display:none !important; }
   body{
     margin:0; background:var(--bg); color:var(--ink);
     font:16px/1.65 -apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Pretendard","Noto Sans KR",sans-serif;
@@ -116,15 +117,18 @@
 
   <div id="ios-flow">
   <div class="card">
-    <h2><span class="num">1</span>테마 다운로드하기</h2>
+    <h2><span class="num">1</span><span id="step1">테마 다운로드하기</span></h2>
     <!-- download 속성을 붙이면 파일 앱에 저장돼 버려 카카오톡이 받지 못한다.
-         평범한 링크여야 카카오톡이 .ktheme 를 직접 받아 안내창을 띄운다. -->
+         평범한 링크여야 카카오톡이 .ktheme 를 직접 받아 안내창을 띄운다.
+         카카오톡 밖에서는 스크립트가 이 버튼을 '링크 공유' 로 바꾼다. -->
     <a id="get" class="btn btn-kakao" href="download/custom-light.ktheme">
+      <!-- 아이콘은 path 하나만 갈아 끼운다. svg 에는 hidden 프로퍼티가 없어
+           (hidden IDL 은 HTMLElement 것) 두 개를 토글하면 동작하지 않는다. -->
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
            stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <path d="M12 4v11M7 11l5 5 5-5M5 20h14"/>
+        <path id="ico" d="M12 4v11M7 11l5 5 5-5M5 20h14"/>
       </svg>
-      테마 다운로드하기
+      <span id="get-label">테마 다운로드하기</span>
     </a>
     <p id="status"></p>
   </div>
@@ -144,21 +148,14 @@
     <details>
       <summary>안내창이 안 뜨거나 파일이 열리지 않아요</summary>
       <ol>
-        <li><b>카카오톡 안에서 이 페이지를 여는 게 가장 확실합니다.</b>
-            링크를 <b>나에게</b>로 보낸 뒤 눌러 보세요.</li>
-        <li>사파리에서 열었다면 <span class="kbd">카카오톡으로 열기</span> 버튼이 대신 뜹니다.
-            그걸 눌러도 같은 안내창으로 이어집니다.</li>
+        <li><b>카카오톡 안에서 열어야 합니다.</b> 사파리·크롬에서 누르면
+            <span class="kbd">테마 다운로드 완료</span> 대신
+            <b>파일을 다운로드하겠습니까?</b> 확인창만 뜨고, 받은 파일은 파일 앱에 저장됩니다.
+            이 페이지 링크를 카카오톡 <b>나에게</b>로 보낸 뒤 카카오톡 안에서 눌러 주세요.</li>
         <li><b>이 <code>.ktheme</code> 파일은 Android·PC 카카오톡에서 적용되지 않습니다.</b>
             iOS 전용 형식입니다. 안드로이드는 별도 APK 소스를 빌드해야 합니다.</li>
         <li>카카오톡 버전이 낮으면 인식하지 못할 수 있습니다. 최신 버전으로 업데이트하세요.</li>
       </ol>
-    </details>
-
-    <details>
-      <summary>원래 테마로 되돌리려면</summary>
-      <p>카카오톡 <span class="kbd">더보기 ⋯</span> → <span class="kbd">설정 ⚙︎</span> →
-         <span class="kbd">테마</span>에서 <b>기본 테마</b>를 선택하면 됩니다.
-         한 번 받아 둔 테마는 목록에 남아 있어 언제든 다시 고를 수 있습니다.</p>
     </details>
   </div>
   </div><!-- /ios-flow -->
@@ -203,6 +200,13 @@
 
   <div class="card">
     <details>
+      <summary>원래 테마로 되돌리려면</summary>
+      <p>카카오톡 <span class="kbd">더보기 ⋯</span> → <span class="kbd">설정 ⚙︎</span> →
+         <span class="kbd">테마</span>에서 <b>기본 테마</b>를 선택하면 됩니다.
+         한 번 받아 둔 테마는 목록에 남아 있어 언제든 다시 고를 수 있습니다.</p>
+    </details>
+
+    <details>
       <summary>이미지 저작권 안내</summary>
       <p>테마에 포함된 <b>기본 프로필 이미지</b>(<code>profileImg01@3x.png</code>)는
          출처와 저작권자가 확인되지 않은 파일입니다. 저작권 상태를 확인할 수 없는 상태임을 밝히며,
@@ -246,20 +250,47 @@
 
   badge.textContent = isIOS ? 'iPhone · iPad' : '카카오톡 사용자 테마';
 
-  if (!isIOS) {
+  // 「테마 다운로드 완료」 안내창은 카카오톡 인앱 브라우저에서만 뜬다.
+  // 그 안이면 버튼을 그대로 둔다 — .ktheme 를 가리키는 평범한 링크면 된다.
+  if (/KAKAOTALK/i.test(ua)) return;
+
+  // 밖에서는 눌러 봐야 파일만 저장되고 테마는 적용되지 않는다. 그래서 버튼을
+  // '링크 공유' 로 바꿔, 카카오톡 나에게 보내는 한 번으로 끝내게 한다.
+  var PAGE = location.href.split(/[?#]/)[0];
+
+  document.getElementById('step1').textContent = '카카오톡으로 보내기';
+  document.getElementById('get-label').textContent = '카카오톡으로 링크 보내기';
+  // 내려받기 화살표 -> 공유 아이콘
+  document.getElementById('ico')
+          .setAttribute('d', 'M4 12v7a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-7M12 15V3M8 7l4-4 4 4');
+
+  if (isIOS) {
+    say('<b>이 브라우저에서는 테마가 적용되지 않습니다.</b>' +
+        '<span class="steps">버튼을 눌러 카카오톡 <b>나에게</b>로 링크를 보낸 뒤, ' +
+        '카카오톡 안에서 그 링크를 누르세요.</span>', 'ok');
+  } else {
     show('desktop-note', true);
     say('<b>데스크톱에서는 적용할 수 없습니다.</b>' +
-        '<span class="steps">이 페이지 주소를 아이폰으로 보내거나, 아이폰 사파리에서 ' +
-        '<b>han-hyeonmin.github.io/kakaotalk-custom-theme</b> 를 직접 여세요.</span>', 'ok');
-    return;
+        '<span class="steps">버튼을 눌러 링크를 카카오톡 <b>나에게</b>로 보낸 뒤, ' +
+        '아이폰 카카오톡에서 그 링크를 누르세요.</span>', 'ok');
   }
 
-  // 카카오톡 인앱 브라우저가 .ktheme 를 직접 받아 안내창을 띄운다. 가장 짧은 경로다.
-  if (!/KAKAOTALK/i.test(ua)) {
-    say('카카오톡 안에서 이 페이지를 열면 가장 확실합니다. ' +
-        '링크를 <b>나에게</b>로 보낸 뒤 눌러 보세요. 사파리에서는 ' +
-        '<b>카카오톡으로 열기</b> 버튼이 대신 뜹니다.');
-  }
+  document.getElementById('get').addEventListener('click', async function (e) {
+    e.preventDefault();
+    try {
+      if (navigator.share) {
+        await navigator.share({ title: '심플 라이트 · 카카오톡 테마', url: PAGE });
+        return;
+      }
+      await navigator.clipboard.writeText(PAGE);
+      say('<b>링크를 복사했습니다.</b>' +
+          '<span class="steps">카카오톡 <b>나에게</b>에 붙여 넣고, 도착한 링크를 ' +
+          '눌러 주세요.</span>', 'ok');
+    } catch (err) {
+      if (err && err.name === 'AbortError') return;   // 사용자가 공유를 취소함
+      say('공유하지 못했습니다. 주소창의 링크를 복사해 카카오톡으로 보내 주세요.', 'err');
+    }
+  });
 
 })();
 </script>
