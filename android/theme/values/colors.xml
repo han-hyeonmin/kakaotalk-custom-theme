@@ -14,9 +14,12 @@
     #F7F7F7  살짝 가라앉은 면  키패드
     #F2F2F2  가라앉은 면   채팅방, 프레스 배경
     #DBDBDB  보더
-    #A8A8A8  보조 텍스트 프레스
-    #737373  보조 텍스트
-    #262626  주 텍스트
+    #262626  주 텍스트   헤더, 버튼, 키패드 숫자
+    #666666  리스트 이름  iOS 판과 같은 값. 더보기탭 그리드 타일(알파 6%)과
+                          한 키로 묶여 있어 AA(4.5:1) 한계선인 이 값에서 절충했다.
+    #8E8E93  보조 텍스트  라스트메시지, 상태메시지
+    #8A8A8A  이름 프레스
+    #B0B0B5  보조 프레스
 -->
 <resources>
 
@@ -27,16 +30,16 @@
     <color name="theme_section_title_color">#737373</color>                     <!--Default-->
 
     <!-- Title : 이름 -->
-    <color name="theme_title_color">#262626</color>                             <!--Default-->
-    <color name="theme_title_pressed_color">#737373</color>                     <!--Pressed-->
+    <color name="theme_title_color">#666666</color>                             <!--Default-->
+    <color name="theme_title_pressed_color">#8A8A8A</color>                     <!--Pressed-->
 
     <!-- Paragraph : 라스트메세지 -->
-    <color name="theme_paragraph_color">#737373</color>                         <!--Default-->
-    <color name="theme_paragraph_pressed_color">#A8A8A8</color>                 <!--Pressed-->
+    <color name="theme_paragraph_color">#8E8E93</color>                         <!--Default-->
+    <color name="theme_paragraph_pressed_color">#B0B0B5</color>                 <!--Pressed-->
 
     <!-- Description : 상태메세지 -->
-    <color name="theme_description_color">#737373</color>                       <!--Default-->
-    <color name="theme_description_pressed_color">#A8A8A8</color>               <!--Pressed-->
+    <color name="theme_description_color">#8E8E93</color>                       <!--Default-->
+    <color name="theme_description_pressed_color">#B0B0B5</color>               <!--Pressed-->
 
 
     <!-- Feature : 서비스/피처별 컬러 -->
